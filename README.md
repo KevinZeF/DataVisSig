@@ -1,67 +1,16 @@
-SETUP
-Open je terminal en voor de commando npm install uit om alle benodigde libaries te installeren
-Voer dan de commando npm start uit om de app te starten
+Check opdrachten.txt voor de opdrachten
+Voor documentatie van de gebruikte libraries, zie onderstaande links
 
-Voor deze opdracht zullen jullie een paar simpele charts maken.
-De data die we vullen in deze charts staat in de data file in de data folder, waar een array van objecten wordt geexporteerd waarbij elk object een browser bevat een het aantal gebruikers van die browser
+https://www.chartjs.org/docs/latest/
 
-Voel je overigens ook gerust vrij om te experimenteren met alle opties die elke library je meegeeft.
+https://echarts.apache.org/en/option.html#title
 
----
+https://github.com/d3/d3/wiki/Tutorials
 
-Opdracht 1
+https://github.com/d3/d3/blob/main/API.md
 
-Laten we eerst beginnen met het maken van een simpele bar chart in chartjs.
-Ga naar de ChartJsBarChart component, deze kan je vinden in components => chartjs => ChartJsBarChart.js
-Voor deze app gebruiken we een aparte React wrapper genaamd "react-chartjs-2".
-Importeer de Barchart component uit react-chartjs-2.
-Vervang de div met deze Barchart component.
-Dit component verwacht een data object die een labels prop verwacht (hier komt de gegevens die je in je x-as wil tonen), en een dataset property waarin je een array van datasets meegeeft.
-Je hoeft hier in datasets momenteel dus maar 1 set te geven. Definieer in die set een label, en de y-as waardes
+D3.js voorbeelden: https://observablehq.com/@d3/gallery
 
----
+Echarts voorbeelden: https://echarts.apache.org/examples/en/index.html
 
-Opdracht 2
-
-We doen nu hetzelfde als Opdracht 1, maar dan nu voor ECharts.
-Ga naar components => echarts => EchartBarChart.js
-Importeer ReactEcharts uit "echarts-for-react".
-Vervang de div met het ReactEcharts component
-Geef aan dit component een option property mee, waarin je een object hebt met configuraties voor je x-as, je y-as en series.
-In je x-as geeft je in principe de categorie mee en in je y-as de benodige waarde voor elke categorie, dus geef de juiste types mee.
-Zorg er ook voor dat je in elke bar de bijbehorende waarde toont.
-
-Opdracht 2: The Sequel
-
-Hmm, weet je wat? Ik wil toch geen bar chart. Geef mij maar liever een pie chart.
-Ga naar components => echarts => EchartPieChart.js en laat mij een pie chart zien.
-Als je dat hebt gedaan, maak er dan een Nightale Rose chart van! Als je je pie chart hebt, hoef je daarvoor alleen de roseType property toe te voegen
-
----
-
-Opdracht 3
-
-Nu komt de wat zwaardere werk. Een barchart maken in D3.js
-Ga naar components => d3charts => D3BarChart.js
-De draw functie is hier nog leeg, dus die gaan we vullen moet logica voor het tekenen van de bar chart
-Definieer eerst de svg element. Dus voeg als eerste toe:
-const svg = d3.select(ref.current)
-Voeg daarna de volgende regel toe:
-const chart = svg.append("g").attr("transform", `translate(${margin}, ${margin})`);
-Hiermee geven we onze chart wat margins, wat wel nodig zal zijn omdat de assen anders niet te lezen zijn.
-Voor de rest van de functie gaan voortbouwen op deze chart variabele.
-
-Maak nu je x- en y scales aan. Gebruik voor de yScale linear scale, en voor de xScale een band scale.
-Vergeet niet range en domain aan te geven voor beide scales. Voor domain van de y scale wil je dus als minimale waarde een 0 en voor maximale waarde het grootste getal in je dataset. (gebruik d3.max om grootste getal te bepalen)
-Indien je padding wil toevoegen tussen de bars, kan je nog na .domain op je xScale .padding toevoegen.
-Nu je je scales hebt, genereer onderaan de x-as en links de y-as
-
-Maak dan als laatste de balken aan.
-Gebruik .selectAll, .data(datasetvariabele) en .enter() om aan tegeven dat je voor al je geselecteerde data een element wil aanmaken
-Hiervoor wanneer we via append een element toevoegde, gebruikten we de g element. Dit keer rechthoeken tekenen, dus gebruik ipv "g" een "rect"
-Vervolgens zijn er vier attributen die we willen toewijzen aan deze "rect" element.
-x: hier geven een functie mee die als parameter data binnen krijgt, waarbij we vervolgens de xScale functie willen aanroepen waar de data name aan meegeven
-y: zelfde als x, maar dan roepen we de yScale aan waarbij we data value aan meegeeven
-height: geef hier hoogte - yScale(d.value)
-width: geef hier xScale.bandWidth() aan mee
-(als je rare resultaten krijgt, kijk eerst of een refresh het voor nu oplost)
+Chart.js voorbeelden: https://www.chartjs.org/docs/latest/samples/bar/vertical.html
