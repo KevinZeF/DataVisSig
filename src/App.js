@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { D3BarChart } from "./components/d3charts/D3BarChart";
+import { EchartBarChart } from "./components/echarts/EchartBarChart";
+import { EchartPieChart } from "./components/echarts/EchartPieChart";
+import { ChartJsBarChart } from "./components/chartjs/ChartJsBarChart";
+import { browserUsage } from "./data/data";
 
 function App() {
+  const xAxis = browserUsage.map((data) => data.name);
+  const yAxis = browserUsage.map((data) => data.value);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>Opdracht 1</h2>
+      <ChartJsBarChart xAxis={xAxis} yAxis={yAxis} />
+      <h2>Opdracht 2</h2>
+      <EchartBarChart xAxis={xAxis} yAxis={yAxis} />
+      <br />
+      <EchartPieChart data={browserUsage} />
+      <h2>Opdracht 3</h2>
+      <D3BarChart data={browserUsage} />
     </div>
   );
 }
